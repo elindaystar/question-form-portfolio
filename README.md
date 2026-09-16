@@ -7,7 +7,8 @@
 ## 구성
 
 - HOME: Hero → About → Profile → Selected Work → Design Attitude → Contact
-- PROFILE: 윤아인 / meihaodeguanxi@gmail.com / Figma, Photoshop, Illustrator, After Effects / 웹디자인기능사, 컴퓨터그래픽스기능사, 시각디자인산업기사
+- PROFILE: 윤아인 / meihaodeguanxi@gmail.com / Figma, Photoshop, Illustrator / 웹디자인기능사, 컴퓨터그래픽스기능사, 시각디자인산업기사
+- SELECTED WORK: Ligachembio (UI/UX), UNSEEN (BRANDING), 라운드랩 독도 (GRAPHIC) 각 1개
 - UI/UX: Ligachembio, GST, MOODLE
 - BRANDING: UNSEEN, 아리담
 - GRAPHIC: 라운드랩 독도
