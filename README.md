@@ -1,31 +1,45 @@
-# QUESTION / FORM
+# QUESTION / FORM — 윤아인
 
 **생각을, 이해되는 형태로.**
 
-[공개 포트폴리오 바로 보기](https://question-to-form-tb-portfolio.elindaystar.chatgpt.site)
+[공개 포트폴리오](https://question-to-form-tb-portfolio.elindaystar.chatgpt.site)
 
-기획서의 정보 구조와 디자인 가이드를 바탕으로 만든 개인 디자이너 포트폴리오입니다. 로그인 없이 누구나 볼 수 있습니다.
+## 구성
 
-## 페이지
+- HOME: Hero → About → Profile → Selected Work → Design Attitude → Contact
+- PROFILE: 윤아인 / meihaodeguanxi@gmail.com / Figma, Photoshop, Illustrator, After Effects / 웹디자인기능사, 컴퓨터그래픽스기능사, 시각디자인산업기사
+- UI/UX: Ligachembio, GST, MOODLE
+- BRANDING: UNSEEN, 아리담
+- GRAPHIC: 라운드랩 독도
+- CONTACT: 이메일 링크
 
-- Home: Hero → About → Selected Work → Design Attitude → Contact
-- Projects: ALL / UI·UX / BRANDING / GRAPHIC 즉시 필터
-- Project: Overview → Question → Interpret → Form → Result → Next Project
-- 반응형 전체 화면 메뉴, 키보드 탐색, 모션 감소 설정, 스크롤 강조, 프로젝트 hover, 드래그 갤러리
+실제 첨부 작업물 6개를 사용합니다. 제공되지 않은 연도·취득일·참여율·성과는 추가하지 않았습니다. 프로젝트 설명은 제공 이미지의 시각적 내용을 바탕으로 작성했습니다.
 
-## 콘텐츠 상태
+## home 폴더
 
-이름·이메일·실제 작업 자료는 등록 전입니다. 프로젝트 3개와 타이포그래피 비주얼은 **구성 예시**이며 실제 수행 이력이나 성과를 의미하지 않습니다. GitHub는 연결된 계정의 실제 프로필입니다.
+```
+home/
+├── index.php                 # Home 및 Profile 포함
+├── projects.php              # 6개 프로젝트 / 카테고리 필터
+├── project.php               # 재사용하는 상세 템플릿
+├── includes/                 # 공통 헤더·푸터·프로필·프로젝트 데이터
+├── dist/
+│   ├── *.html                # 공개 배포용 정적 페이지
+│   ├── assets/projects/      # 원본 비율과 해상도를 유지한 WebP 6개
+│   ├── css/editorial.css
+│   └── js/                   # 메뉴, 필터, 커서, 모션
+├── generate.mjs              # PHP → 정적 HTML
+├── export-github.mjs         # GitHub 업로드본 준비
+├── validate.mjs              # 링크·이미지·콘텐츠 검증
+├── server.mjs                # 정적 미리보기
+└── .openai/hosting.json      # 기존 공개 사이트 연결
+```
 
-## 콘텐츠 수정
+## 수정 및 실행
 
-`includes/project-data.php`에서 프로필과 프로젝트를 관리합니다. `includes/header.php`, `includes/footer.php`는 공통 레이아웃입니다. `index.php`, `projects.php`, `project.php`는 PHP 원본입니다. 스타일과 기능별 JavaScript는 `dist/css/editorial.css`, `dist/js/`에 있습니다.
+프로필·프로젝트는 `includes/project-data.php`에서 관리합니다. 썸네일은 원본 이미지를 변형하지 않고 CSS `object-fit`과 프로젝트별 `crop`, `ratio` 값으로 필요한 부분만 보여줍니다. 상세 페이지에는 잘리지 않은 전체 작업물이 표시됩니다.
 
-## 실행
-
-XAMPP의 Apache 문서 루트에 이 폴더를 복사한 뒤 `index.php`를 엽니다. 상세 페이지는 `project.php?id=project01` 형식입니다. PHP 8 이상을 권장합니다.
-
-정적 배포용 페이지는 같은 PHP 템플릿에서 생성합니다.
+XAMPP의 `htdocs` 안에 `home` 폴더를 복사하면 `http://localhost/home/index.php`에서 실행할 수 있습니다. 상세 URL은 `project.php?id=project01`부터 `project06`까지 지원합니다.
 
 ```sh
 node generate.mjs
@@ -33,11 +47,11 @@ node validate.mjs
 node server.mjs
 ```
 
-`generate.mjs`는 기본적으로 Windows XAMPP의 PHP를 사용합니다. 다른 환경에서는 `PHP_BINARY` 환경 변수에 PHP 실행 파일 경로를 지정합니다. 공개 호스팅에는 PHP 소스가 아닌 `dist/`의 정적 HTML·CSS·JavaScript만 배포합니다. 정적 상세 페이지는 JavaScript 없이도 읽을 수 있습니다.
+미리보기: `http://127.0.0.1:4173`. PHP 경로는 `PHP_BINARY` 환경 변수로 설정할 수 있습니다. Windows 기본값은 `C:/xampp/php/php.exe`, 그 외에는 `php`입니다.
 
-브라우저에서 `http://127.0.0.1:4173`으로 확인할 수 있습니다. 서버에는 데이터베이스나 로그인 기능이 없습니다.
+정적 호스팅에는 `dist/`만 배포합니다. 이름, 이메일과 자격증은 사용자가 공개하도록 제공한 정보입니다.
 
 
 ## GitHub 배포본
 
-이 저장소의 루트 HTML은 CSS·JavaScript를 포함한 독립 실행형 정적 배포본입니다. PHP 원본과 콘텐츠 데이터는 [question-form-source.zip](question-form-source.zip)에 포함되어 있습니다. 원본에서 `node generate.mjs`로 다시 내보낼 수 있습니다.
+저장소 루트 HTML과 WebP 파일은 바로 호스팅할 수 있는 정적 사이트입니다. 정리된 `home` 폴더의 PHP 원본은 [question-form-source.zip](question-form-source.zip)에서 내려받을 수 있습니다.
